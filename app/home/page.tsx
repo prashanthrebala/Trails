@@ -6,7 +6,7 @@ import { posts } from "@/constants";
 const Home = () => {
 	return (
 		<div className="w-full bg-amber-500 min-h-screen fx-center">
-			<div className="w-1/3">
+			<div className="w-2/5">
 				{posts.map((post: ImageCardProps) => (
 					<ImageCard
 						username={post.username}

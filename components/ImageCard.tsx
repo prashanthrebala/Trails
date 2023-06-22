@@ -8,7 +8,14 @@ const ImageCard = (props: ImageCardProps) => {
 	return (
 		<div className="fx-center flex-col bg-stone-300 m-4 rounded-xl">
 			<div className="h-12 fx-center">{username}</div>
-			<Image width={1080} height={0} src={imageURL} alt={caption || ""} />
+			<div className="relative w-full h-96">
+				<Image
+					fill
+					src={imageURL}
+					alt={caption || ""}
+					style={{ objectFit: "cover" }}
+				/>
+			</div>
 			<div className="h-12 fx-center">{caption}</div>
 		</div>
 	);
