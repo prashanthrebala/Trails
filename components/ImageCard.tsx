@@ -6,9 +6,9 @@ const ImageCard = (props: ImageCardProps) => {
 	const { username, imageURL, caption } = props;
 
 	return (
-		<div className="fx-center flex-col bg-stone-300 m-4 rounded-xl">
-			<div className="h-12 fx-center">{username}</div>
-			<div className="relative w-full h-96">
+		<div className="fx-center flex-col bg-stone-300 sm:mx-16 m-4 rounded-xl">
+			<div className="p-3 h-16 fx-center">{username}</div>
+			<div className="relative w-full max-w-3xl h-72 lg:h-96">
 				<Image
 					fill
 					src={imageURL}
@@ -16,7 +16,11 @@ const ImageCard = (props: ImageCardProps) => {
 					style={{ objectFit: "cover" }}
 				/>
 			</div>
-			<div className="h-12 fx-center">{caption}</div>
+			<div className="w-full p-3">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque fugit
+				labore in, velit illum rem aperiam dolorem eaque fuga, quae repellendus
+				omnis incidunt tempore! Odio nobis deleniti ipsam dolore inventore!
+			</div>
 		</div>
 	);
 };
