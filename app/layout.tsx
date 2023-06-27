@@ -5,7 +5,7 @@ import { Navbar } from "@/components";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-	title: "Trail",
+	title: "Trails",
 	description: "Share your favourite spots from your travel diaries",
 };
 
