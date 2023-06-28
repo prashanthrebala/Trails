@@ -29,3 +29,7 @@ body {
 .fx-center {
 	@apply flex justify-center items-center;
 }
+
+input[type="file"] {
+	display: none;
+}
