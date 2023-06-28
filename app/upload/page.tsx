@@ -2,11 +2,13 @@
 
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { MdCloudUpload } from "react-icons/md";
 
 const UploadForm: React.FC = () => {
 	const [fileBase64, setFileBase64] = useState("");
 	const [fileName, setFileName] = useState("");
+	const router = useRouter();
 
 	const validateFileType = (file: File): boolean => {
 		const allowedFileTypes = ["image/jpeg", "image/png"];
@@ -78,6 +80,7 @@ const UploadForm: React.FC = () => {
 			})
 			.then((responseData) => {
 				console.log("Response data:", responseData);
+				router.push("/");
 			})
 			.catch((error) => {
 				console.error("Error performing the POST request:", error);
