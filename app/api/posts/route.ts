@@ -10,7 +10,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
 	const newUploadData = await req.json();
-	const { caption, username, geoLocation, fileBase64, fileName } =
+	const { description, username, geoLocation, fileBase64, fileName } =
 		newUploadData;
 	const url = process.env.IMAGE_SERVER_URL || "";
 	const uploadEndpoint = `${url}/trails/upload`;
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 	const db = await mongoClient.db("trail");
 	const postedData = await db.collection("posts").insertOne({
 		username,
-		caption,
+		description,
 		location: geoLocation,
 		likes: 0,
 		imageUrl,
