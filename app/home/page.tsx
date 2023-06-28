@@ -5,7 +5,9 @@ import { posts } from "@/constants";
 
 const getPosts = async () => {
 	const postApiURL = "http://localhost:3000/api/posts";
-	const response = await fetch(postApiURL);
+	const response = await fetch(postApiURL, {
+		next: { revalidate: 10 },
+	});
 	const responseData = await response.json();
 	const postsData = responseData.data;
 	return postsData;
