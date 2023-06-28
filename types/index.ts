@@ -1,10 +1,9 @@
 export interface ImageCardProps {
-	username: string;
-	imageURL: string;
-	caption?: string;
+	username?: string;
+	imageUrl: string;
+	thumbnailUrl?: string;
+	description?: string;
 	likes?: number;
-	location?: {
-		latitude: number;
-		longitude: number;
-	};
+	geoLocation?: string;
+	location?: string;
 }
