@@ -59,7 +59,7 @@ const UploadForm: React.FC = () => {
 			return;
 		}
 
-		fetch("http://localhost:3000/api/posts", {
+		fetch("http://192.168.1.129:3000/api/posts", {
 			method: "POST",
 			body: JSON.stringify({
 				username: "Prashanth Rebala",

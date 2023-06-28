@@ -4,7 +4,7 @@ import { ImageCardProps } from "@/types";
 import { posts } from "@/constants";
 
 const getPosts = async () => {
-	const postApiURL = "http://localhost:3000/api/posts";
+	const postApiURL = "http://192.168.1.129:3000/api/posts";
 	const response = await fetch(postApiURL, {
 		next: { revalidate: 10 },
 	});
@@ -22,8 +22,9 @@ const Home = async () => {
 				{posts.map((post: ImageCardProps) => (
 					<ImageCard
 						username={post.username}
-						imageURL={post.imageURL}
-						caption={post.caption}
+						imageUrl={post.imageUrl}
+						location={post.location}
+						description={post.description}
 					/>
 				))}
 			</div>
