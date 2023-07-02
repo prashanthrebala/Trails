@@ -88,7 +88,7 @@ const UploadForm: React.FC = () => {
 	};
 
 	return (
-		<div className="w-full min-h-screen bg-[#00261C] flex justify-center py-16">
+		<div className="w-full h-full bg-[#00261C] flex justify-center py-16">
 			<form
 				className="flex flex-col gap-6 w-96 max-w-6xl m-4"
 				onSubmit={handleSubmit}

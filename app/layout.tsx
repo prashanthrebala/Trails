@@ -17,17 +17,16 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body
-				style={{
-					height: "100vh",
-					width: "100%",
-					backgroundImage: `url(${bgImage.src})`,
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}
-			>
+			<body className="h-screen w-full flex flex-col">
 				<Navbar />
-				{children}
+				<div
+					className="overflow-y-auto w-full h-full bg-cover bg-center"
+					style={{
+						backgroundImage: `url(${bgImage.src})`,
+					}}
+				>
+					{children}
+				</div>
 			</body>
 		</html>
 	);
