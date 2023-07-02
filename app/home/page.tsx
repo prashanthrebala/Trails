@@ -18,7 +18,7 @@ const Home = async () => {
 
 	return (
 		<div className="w-full bg-amber-500 min-h-screen fx-center">
-			<div className="w-full max-w-3xl">
+			<div className="w-full max-w-xl">
 				{posts.map((post: ImageCardProps) => (
 					<ImageCard
 						username={post.username}
