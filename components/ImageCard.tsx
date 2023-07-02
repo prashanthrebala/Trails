@@ -6,7 +6,7 @@ const ImageCard = (props: ImageCardProps) => {
 	const { username, imageUrl, description, geoLocation, location } = props;
 
 	return (
-		<div className="fx-center flex-col bg-stone-300 sm:mx-16 m-4 rounded-xl">
+		<div className="fx-center flex-col bg-stone-300 sm:mx-16 m-10 rounded-xl">
 			<div className="p-3 h-16 fx-center">{location}</div>
 			<Image
 				src={imageUrl}
