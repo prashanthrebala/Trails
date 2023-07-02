@@ -17,7 +17,7 @@ const Home = async () => {
 	const posts = await getPosts();
 
 	return (
-		<div className="w-full bg-amber-500 min-h-screen fx-center">
+		<div className="w-full min-h-screen fx-center bg-[#00000000]">
 			<div className="w-full max-w-xl">
 				{posts.map((post: ImageCardProps) => (
 					<ImageCard

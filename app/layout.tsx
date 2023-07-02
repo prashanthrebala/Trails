@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components";
+import bgImage from "@/public/background/freepik-forest.jpg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,15 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body>
+			<body
+				style={{
+					height: "100vh",
+					width: "100%",
+					backgroundImage: `url(${bgImage.src})`,
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+				}}
+			>
 				<Navbar />
 				{children}
 			</body>
