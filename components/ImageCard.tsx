@@ -16,7 +16,7 @@ const ImageCard = (props: ImageCardProps) => {
 				sizes="100vw"
 				style={{ width: "100%", height: "auto" }}
 			/>
-			<div className="p-3 w-full">
+			<div className="p-3 py-6 w-full">
 				<span className="font-bold">{username}</span>: {description}
 			</div>
 		</div>
