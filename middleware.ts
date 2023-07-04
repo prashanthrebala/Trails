@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
 	const origin = request.headers.get("origin");
-	console.log(origin);
 
 	const response = NextResponse.next();
 
@@ -16,10 +15,6 @@ export function middleware(request: NextRequest) {
 		"Content-Type, Authorization"
 	);
 	response.headers.set("Access-Control-Max-Age", "86400");
-
-	console.log("middleware");
-	console.log(request.method);
-	console.log(request.url);
 
 	return response;
 }
