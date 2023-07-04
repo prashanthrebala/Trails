@@ -2,10 +2,6 @@ import React from "react";
 import { ImageCard } from "@/components";
 import { ImageCardProps } from "@/types";
 import { posts } from "@/constants";
-import authOptions from "@/lib/authOptions";
-import NextAuthSessionProvider from "../providers/sessionProvider";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 const getPosts = async () => {
 	const postApiURL = "http://192.168.1.129:3000/api/posts";
@@ -18,12 +14,6 @@ const getPosts = async () => {
 };
 
 const Home = async () => {
-	const session = await getServerSession(authOptions);
-
-	if (!session) {
-		redirect("/signIn");
-	}
-
 	const posts = await getPosts();
 
 	return (
