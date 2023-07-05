@@ -8,6 +8,8 @@ import { authOptions } from "@/lib/authOptions";
 // you can redirect your user to your custom sign in page
 // each sign in button will have a callback with signIn("authProvider", {callbackURL?})
 
+// api/auth/session will return the result that is being used by useSession()
+
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
