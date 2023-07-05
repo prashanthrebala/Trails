@@ -5,29 +5,20 @@ import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { MdCloudUpload } from "react-icons/md";
-import type { Session } from "next-auth";
-
-type UserSession = {
-	authenticated: boolean;
-	session: Session;
-};
 
 const UploadForm = () => {
 	const [fileBase64, setFileBase64] = useState("");
 	const [fileName, setFileName] = useState("");
 	const router = useRouter();
-	const { data, status } = useSession();
+	const { data: session, status } = useSession({
+		required: true,
+		onUnauthenticated() {
+			redirect("/signin?callbackUrl=/upload");
+		},
+	});
 
 	if (status === "loading") {
 		return <h1>Loading</h1>;
-	}
-
-	console.log(data);
-
-	const { authenticated, session } = data as unknown as UserSession;
-
-	if (!authenticated) {
-		redirect("/signin?callbackUrl=/upload");
 	}
 
 	const validateFileType = (file: File): boolean => {
