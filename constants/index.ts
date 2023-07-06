@@ -1,4 +1,6 @@
-export const posts = [
+const DEFAULT_RESOLUTION = 1080;
+
+const posts = [
 	{
 		username: "Prashanth Rebala",
 		likes: 0,
@@ -44,3 +46,5 @@ export const posts = [
 		},
 	},
 ];
+
+export { DEFAULT_RESOLUTION, posts };

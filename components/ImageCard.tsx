@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { ImageCardProps } from "@/types";
+import { DEFAULT_RESOLUTION } from "@/constants";
 
-const getTransformUrl = (baseUrl: string, addCropRatio?: boolean) => {
-	return `${baseUrl}?tr=w-1080${addCropRatio ? ",ar-4-5" : ""}`;
-};
+const getTransformUrl = (baseUrl: string, addCropRatio?: boolean) =>
+	`${baseUrl}?tr=w-${DEFAULT_RESOLUTION}${addCropRatio ? ",ar-4-5" : ""}`;
 
 const ImageCard = (props: ImageCardProps) => {
 	const { username, imageUrl, description } = props;
