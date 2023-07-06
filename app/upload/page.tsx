@@ -4,9 +4,11 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { SessionProvider, useSession } from "next-auth/react";
 import FileUpload from "@/components/FileUpload";
+import { validateFileType } from "@/lib/utils";
 
 const InnerUploadForm = () => {
 	const [fileBase64, setFileBase64] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const [fileName, setFileName] = useState("");
 	const router = useRouter();
 	const { data: session, status } = useSession({
@@ -19,18 +21,6 @@ const InnerUploadForm = () => {
 	if (status === "loading") {
 		return <h1>Loading</h1>;
 	}
-
-	const validateFileType = (file: File): boolean => {
-		const allowedFileTypes = ["image/jpeg", "image/png"];
-		const fileType = file.type;
-
-		if (!allowedFileTypes.includes(fileType)) {
-			alert("Invalid file type. Please select a JPEG or PNG image.");
-			return false;
-		}
-
-		return true;
-	};
 
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const selectedFile = e.target.files?.[0];
@@ -59,7 +49,6 @@ const InnerUploadForm = () => {
 		e.preventDefault();
 
 		const form = e.target as HTMLFormElement;
-		// const username = form.username.value;
 		const description = form.description.value;
 		const geoLocation = form.geoLocation.value;
 		const file = form.trailImage.files?.[0];
@@ -69,35 +58,33 @@ const InnerUploadForm = () => {
 			return;
 		}
 
-		fetch("http://192.168.1.129:3000/api/posts", {
-			method: "POST",
-			body: JSON.stringify({
-				username: "Prashanth Rebala",
-				description,
-				geoLocation,
-				fileName,
-				fileBase64,
-			}),
-		})
-			.then((response) => {
-				if (response.ok) {
-					console.log("Post request successful");
-					return response.json();
-				} else {
-					console.log("Post request failed");
-					throw new Error("Post request failed");
-				}
-			})
-			.then((responseData) => {
-				console.log("Response data:", responseData);
-				router.push("/home");
-			})
-			.catch((error) => {
-				console.error("Error performing the POST request:", error);
+		setIsLoading(true);
+
+		try {
+			const response = await fetch("http://192.168.1.129:3000/api/posts", {
+				method: "POST",
+				body: JSON.stringify({
+					username: "Prashanth Rebala",
+					description,
+					geoLocation,
+					fileName,
+					fileBase64,
+				}),
 			});
+
+			if (response.ok) {
+				router.push("/home");
+			} else {
+				throw new Error("Post request failed");
+			}
+		} catch (error) {
+			console.error("Error performing the POST request:", error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	return (
+	return !isLoading ? (
 		<div className="w-full h-full bg-[#00261C] flex justify-center py-16">
 			<form
 				className="flex flex-col gap-6 w-96 max-w-6xl m-4"
@@ -125,6 +112,8 @@ const InnerUploadForm = () => {
 				</button>
 			</form>
 		</div>
+	) : (
+		<h1 className="text-neutral-100">LOADING</h1>
 	);
 };
 
