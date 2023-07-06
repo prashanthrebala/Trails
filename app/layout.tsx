@@ -1,9 +1,6 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { Navbar } from "@/components";
 import bgImage from "@/public/background/freepik-forest.jpg";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Trails",
