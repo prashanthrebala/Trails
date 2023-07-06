@@ -6,4 +6,5 @@ export interface ImageCardProps {
 	likes?: number;
 	geoLocation?: string;
 	location?: string;
+	addCropRatio?: boolean;
 }

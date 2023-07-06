@@ -25,6 +25,7 @@ const Home = async () => {
 						imageUrl={post.imageUrl}
 						location={post.location}
 						description={post.description}
+						addCropRatio={post.addCropRatio}
 					/>
 				))}
 			</div>
