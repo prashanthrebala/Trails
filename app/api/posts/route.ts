@@ -10,8 +10,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
 	const newUploadData = await req.json();
-	const { description, username, geoLocation, fileBase64, fileName } =
-		newUploadData;
+	const { description, username, geoLocation } = newUploadData;
+	const { fileBase64, fileName, addCropRatio } = newUploadData;
 	const url = process.env.IMAGE_SERVER_URL || "";
 	const uploadEndpoint = `${url}/trails/upload`;
 
@@ -26,7 +26,10 @@ export async function POST(req: NextRequest) {
 		}),
 	});
 
-	const { imageUrl, thumbnailUrl } = await result.json();
+	const data = await result.json();
+	console.log(JSON.stringify(data, null, 2));
+	const { imageUrl, thumbnailUrl } = data;
+
 	const mongoClient = await clientPromise;
 	const db = await mongoClient.db("trail");
 	const postedData = await db.collection("posts").insertOne({
@@ -36,6 +39,7 @@ export async function POST(req: NextRequest) {
 		likes: 0,
 		imageUrl,
 		thumbnailUrl,
+		addCropRatio,
 	});
 
 	return NextResponse.json({ data: "success" });

@@ -10,17 +10,18 @@ const InnerUploadForm = () => {
 	const [fileBase64, setFileBase64] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [fileName, setFileName] = useState("");
+	const [addCropRatio, setAddCropRatio] = useState(false);
 	const router = useRouter();
-	const { data: session, status } = useSession({
-		required: true,
-		onUnauthenticated() {
-			redirect("/signin?callbackUrl=/upload");
-		},
-	});
+	// const { data: session, status } = useSession({
+	// 	required: true,
+	// 	onUnauthenticated() {
+	// 		redirect("/signin?callbackUrl=/upload");
+	// 	},
+	// });
 
-	if (status === "loading") {
-		return <h1>Loading</h1>;
-	}
+	// if (status === "loading") {
+	// 	return <h1>Loading</h1>;
+	// }
 
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const selectedFile = e.target.files?.[0];
@@ -36,6 +37,16 @@ const InnerUploadForm = () => {
 			const base64Data = reader.result as string;
 			setFileName(file.name);
 			setFileBase64(base64Data);
+
+			// this code is added since imagekit incorrectly
+			// give the height and width of the image
+			const img = new Image();
+			img.onload = () => {
+				const width = img.width;
+				const height = img.height;
+				setAddCropRatio(height / width >= 1.25);
+			};
+			img.src = base64Data;
 		};
 
 		reader.onerror = (error) => {
@@ -69,6 +80,7 @@ const InnerUploadForm = () => {
 					geoLocation,
 					fileName,
 					fileBase64,
+					addCropRatio,
 				}),
 			});
 
@@ -85,7 +97,7 @@ const InnerUploadForm = () => {
 	};
 
 	return !isLoading ? (
-		<div className="w-full h-full bg-[#00261C] flex justify-center py-16">
+		<div className="w-full h-full flex justify-center py-16">
 			<form
 				className="flex flex-col gap-6 w-96 max-w-6xl m-4"
 				onSubmit={handleSubmit}
