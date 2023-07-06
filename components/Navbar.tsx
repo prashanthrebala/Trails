@@ -1,6 +1,11 @@
 import React from "react";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 
-const Navbar = () => {
+const Navbar = async () => {
+	const data = await getServerSession(authOptions);
+	const userName = data?.user?.name || "Profile";
+
 	return (
 		<div className="w-full h-16 bg-gray-950 text-neutral-100 fx-center">
 			<div className="w-20 fx-center">Trails</div>
@@ -10,7 +15,7 @@ const Navbar = () => {
 					placeholder="Search for Trails"
 				/>
 			</div>
-			<div className="w-20 fx-center">Profile</div>
+			<div className="w-20 fx-center">{userName}</div>
 		</div>
 	);
 };
