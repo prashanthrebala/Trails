@@ -27,7 +27,14 @@ const Navbar = async () => {
 				</div>
 			</Link>
 			<div className="w-16 fx-center">
-				<CgProfile size={30} />
+				{data?.user?.image ? (
+					<div
+						className="rounded-full w-10 h-10 bg-contain"
+						style={{ backgroundImage: `url(${data?.user?.image})` }}
+					/>
+				) : (
+					<CgProfile size={30} />
+				)}
 			</div>
 		</div>
 	);
