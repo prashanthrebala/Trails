@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "@/lib/mongo";
+import { DEFAULT_POSTS_PER_LOAD } from "@/constants";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+	const page = parseInt(req.nextUrl.searchParams.get("page") ?? "0");
 	const mongoClient = await clientPromise;
 	const db = await mongoClient.db("trail");
-	const data = await db.collection("posts").find().toArray();
+	const data = await db
+		.collection("posts")
+		.find()
+		.skip(page)
+		.limit(DEFAULT_POSTS_PER_LOAD)
+		.toArray();
+
 	return NextResponse.json({ data });
 }
 
