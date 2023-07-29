@@ -1,4 +1,5 @@
 const DEFAULT_RESOLUTION = 1080;
+const DEFAULT_POSTS_PER_LOAD = 7;
 
 const posts = [
 	{
@@ -47,4 +48,4 @@ const posts = [
 	},
 ];
 
-export { DEFAULT_RESOLUTION, posts };
+export { DEFAULT_RESOLUTION, DEFAULT_POSTS_PER_LOAD, posts };
